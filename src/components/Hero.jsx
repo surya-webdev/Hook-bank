@@ -1,6 +1,21 @@
+import { useGSAP } from '@gsap/react';
 import { discount, robot } from '../assets';
 import styles from '../style';
+import gsap from 'gsap';
 function Hero() {
+  useGSAP(() => {
+    const t1 = gsap.timeline({
+      defaults: { duration: 0.75, ease: 'power2.out' },
+    });
+    t1.fromTo(
+      '.text-1',
+      { x: 100, opacity: 0 },
+      { x: 0, opacity: 1, delay: 0.35 },
+      '<',
+    );
+    t1.fromTo('.text-2', { y: 100, opacity: 0 }, { y: 0, opacity: 1 }, '<');
+    t1.fromTo('.text-3', { x: -100, opacity: 0 }, { x: 0, opacity: 1 }, '<');
+  }, []);
   return (
     <div className="gris-cols-1 my-10 grid items-center gap-10 md:mx-0 md:my-0 lg:grid-cols-2">
       <div className="flex flex-col gap-6">
@@ -15,10 +30,16 @@ function Hero() {
           </div>
         </div>
         {/* grid  */}
-        <div className="mx-10 text-5xl md:text-7xl">
+        <div className="items-center px-10 text-5xl md:text-7xl">
           <p>
-            The Next <span className="text-gradient block">Generation</span>{' '}
-            Payment Method.
+            <span className="text-1 block">The Next </span>{' '}
+            <span className="text-2 text-gradient block">Generation</span>{' '}
+            <span className="text-3 block"> Payment Method.</span>
+          </p>
+          <p className={`${styles.paragraph} py-10`}>
+            Our team of experts uses a methodology to identify the credit cards
+            most likely to fit your needs. We examine annual percentage rates,
+            annual fees.
           </p>
         </div>
       </div>
